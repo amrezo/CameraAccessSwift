@@ -33,6 +33,14 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     
     @IBAction func openPhotos(_ sender: UIButton) {
         
+        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
+            let imagePicker = UIImagePickerController()
+            imagePicker.delegate = self
+            imagePicker.sourceType = .photoLibrary
+            imagePicker.allowsEditing = true
+            present(imagePicker, animated: true, completion: nil)
+        }
+        
     }
     
     @IBAction func saveImage(_ sender: UIButton) {
