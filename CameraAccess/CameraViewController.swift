@@ -45,6 +45,29 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
     
     @IBAction func saveImage(_ sender: UIButton) {
         
+        guard let imagePicked = imageView.image else { return }
+        let imageData = UIImageJPEGRepresentation(imagePicked, 0.6)
+        
+        guard let unwrappedImageData = imageData else { return }
+        let compressedJPGImage = UIImage(data: unwrappedImageData)
+        
+        guard let unwrappedCompressedJPGImage = compressedJPGImage else { return }
+        UIImageWriteToSavedPhotosAlbum(unwrappedCompressedJPGImage, nil, nil, nil)
+        
+        
+        let alert = UIAlertController(title: "Saved!", message: "Your image has been saved to your photos.", preferredStyle: .alert)
+        let greatAction = UIAlertAction(title: "Great!", style: .cancel, handler: nil)
+        alert.addAction(greatAction)
+        
+        present(alert, animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        let image = info[UIImagePickerControllerOriginalImage] as! UIImage
+        imageView.image = image
+        dismiss(animated: true, completion: nil)
+        
+
     }
     
 
