@@ -8,17 +8,37 @@
 
 import UIKit
 
-class CameraViewController: UIViewController {
-
+class CameraViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    
+    @IBOutlet weak var imageView: UIImageView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    @IBAction func openCamera(_ sender: UIButton) {
+        
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            let imagePicker = UIImagePickerController()
+            imagePicker.delegate = self
+            imagePicker.sourceType = .camera
+            imagePicker.allowsEditing = false
+            present(imagePicker, animated: true, completion: nil)
+        }
+        
     }
+    
+    
+    @IBAction func openPhotos(_ sender: UIButton) {
+        
+    }
+    
+    @IBAction func saveImage(_ sender: UIButton) {
+        
+    }
+    
 
 
 }
