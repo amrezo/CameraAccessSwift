@@ -10,12 +10,13 @@ import UIKit
 
 class CameraViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-    
+    @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var imageView: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        saveButtonHideOrNot()
     }
     
     @IBAction func openCamera(_ sender: UIButton) {
@@ -40,7 +41,7 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
             imagePicker.allowsEditing = true
             present(imagePicker, animated: true, completion: nil)
         }
-        
+
     }
     
     @IBAction func saveImage(_ sender: UIButton) {
@@ -67,7 +68,15 @@ class CameraViewController: UIViewController, UIImagePickerControllerDelegate, U
         imageView.image = image
         dismiss(animated: true, completion: nil)
         
-
+        saveButtonHideOrNot()
+    }
+    
+    func saveButtonHideOrNot() {
+        if imageView.image == nil {
+            saveButton.isHidden = true
+        } else {
+            saveButton.isHidden = false
+        }
     }
     
 
